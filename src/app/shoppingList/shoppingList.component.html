@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-xs-10">
+    <shoppingListEdit-app [editedIngredient]="viewedIng" (addNewIngredient) = "onAddedIngredient($event)"></shoppingListEdit-app>
+    <hr>
+    <ul class="list-group">
+
+      <a  class="list-group-item" style="cursor: pointer"
+          *ngFor="let ingrdient of ingredients"
+
+          (click)="onEditIngredient(ingrdient)"
+      >
+        {{ingrdient.name}} () {{ingrdient.amount}}
+
+      </a>
+
+    </ul>
+  </div>
+
+</div>
+
