@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <form>
+    <form (ngSubmit)="onAddIngredient(f)" #f="ngForm">
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="name">Name</label>
@@ -8,26 +8,37 @@
             type="text"
             id="name"
             class="form-control"
-            #nameInput
-            value="{{editedIngredient?.name}}"
+            ngModel
+            name="name"
+            required
+            #name="ngModel"
+            [ngModel]="editedIngredient?.name"
           >
+          <span *ngIf="!name.valid && name.touched" class="help-block">The Name is required</span>
         </div>
-        <div class="col-sm-2 form-group">
+
+        <div class="col-sm-3 form-group">
           <label for="amount">Amount</label>
           <input
             type="number"
             id="amount"
             class="form-control"
-            #amountInput
-            value="{{editedIngredient?.amount}}"
-          >
+            ngModel
+            name="amount"
+            required
+            pattern="^[1-9]+[0-9]*$"
+            #amount="ngModel"
+            [ngModel]="editedIngredient?.amount"
+           >
+          <span *ngIf="!amount.valid && amount.touched" class="help-block">The Amount is required</span>
         </div>
      </div>
      <div class="row">
        <div class="col-xs-12">
-         <button class="btn btn-success" type="submit" (click)="addIngredient()">Add</button>
-         <button class="btn btn-danger" type="button">Delete</button>
-         <button class="btn btn-primary" type="button">Clear</button>
+         <button *ngIf="!isSelected" class="btn btn-success"  type="submit" [disabled]="!f.valid "  >Add</button>
+         <button *ngIf="isSelected" class="btn btn-success"  type="button" (click)="onUpdateIngredient(editedIngredient, f)" [disabled]="!f.valid "  >Update</button>
+         <button *ngIf="isSelected" class="btn btn-danger" type="button"  (click)="onDelete(editedIngredient,f)" >Delete</button>
+         <button class="btn btn-primary" type="button" (click)="onClear(f)">Clear</button>
        </div>
 
      </div>
