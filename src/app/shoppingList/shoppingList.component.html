@@ -12,14 +12,12 @@
             <!--{{ingrdient.name}} () {{ingrdient.amount}}-->
 
           <!--</a>-->
-
         <a  class="list-group-item" style="cursor: pointer"
             *ngFor="let ingrdient of ingredients; let i=index"
           (click)="onEditIngredient(i)"
         >
             {{ingrdient.name}} () {{ingrdient.amount}}
-
-        </a>
+      </a>
 
     </ul>
   </div>

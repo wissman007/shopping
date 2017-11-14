@@ -9,15 +9,17 @@
         <li routerLinkActive="active"><a routerLink="/shopping-list">Shopping</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-
-        <li class="dropdown" appDropDown>
-          <a href="" class="dropdown-toggle"  role="button">Manage<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a >Save Data</a></li>
-            <li><a >Fech Data</a></li>
-          </ul>
-
-        </li>
+        <ng-template [ngIf]="!isUserAuthentificated" >
+           <li><a routerLink="/signup">Register</a></li>
+           <li><a routerLink="/signin">Login</a></li>
+        </ng-template>
+         <li class="dropdown" appDropDown *ngIf="isUserAuthentificated">
+            <a class="dropdown-toggle"  role="button">Manage<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a (click)="onSaveData()">Save Data</a></li>
+              <li><a (click)="onFetchData()" >Fech Data</a></li>
+            </ul>
+          </li>
 
       </ul>
     </div>
